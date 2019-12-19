@@ -24,6 +24,9 @@
 	  (sim-time (enabled ?time-sync-enable) (estimate ?time-estimate-enable)
 		    (now (create$ 0 0)))
   )
+  ; needed to locally start and partially ignore the simulation flag, running original timer..
+  ; TODO: comment out for real simulation run
+  ;(assert (sim-time (enabled false)))
 )
 
 (defrule sim-net-recv-SimTimeSync
@@ -56,12 +59,12 @@
 
 (deffunction mps-reset (?name)
   ;(bind ?name (sym-cat ?name))
-  ;(printout t "Simulated machine reset" crlf)
+  (printout t "Simulated machine reset of " ?name crlf)
 )
 
 (deffunction mps-reset-base-counter (?name)
   (bind ?mname (sym-cat ?name))
-  ;(printout t "Reset base counter for " ?name crlf)
+  (printout t "Reset base counter for " ?name crlf)
   (do-for-fact ((?m machine)) (eq ?m:name ?mname)
     (assert (machine-mps-state (name ?mname) (state ?m:state) (num-bases 0)))
   )

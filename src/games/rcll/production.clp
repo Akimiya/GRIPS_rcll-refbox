@@ -334,6 +334,7 @@
   (modify ?m (state BROKEN) (proc-state PROCESSING)
 	  (broken-reason (str-cat ?n ": insufficient bases ("
 				  (- ?ba ?bu) " < " ?req-bases ")")))
+  (printout t "Machine " ?n " insufficient bases! added " ?ba " minus used " ?bu " smaller then needed " ?req-bases crlf)
 )
 
 (defrule prod-proc-state-processing-rs-start
@@ -348,7 +349,7 @@
   (printout t "Machine " ?n " of type RS switching to PREPARED state" crlf)
   (modify ?m (proc-state PREPARED) (desired-lights GREEN-BLINK)
              (prep-blink-start ?gt))
-  (printout t "Mounting ring " ?n " from slide " (member$ ?ring-color ?ring-colors) crlf)
+  (printout t "Mounting ring " ?ring-color " from slide " (member$ ?ring-color ?ring-colors) crlf)
   (mps-rs-mount-ring (str-cat ?n) (member$ ?ring-color ?ring-colors))
 )
 

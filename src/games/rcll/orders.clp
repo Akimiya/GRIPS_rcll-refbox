@@ -32,6 +32,10 @@
   =>
   (modify ?of (active TRUE))
   (modify ?sf (count 1) (time 0 0))
+  
+  ; additional logged message
+  (printout t "Activating Order @" ?gt " id=" ?id " num=" ?q " complexity=" ?c " deliver from " (time-sec-format (nth$ 1 ?period)) " to " (time-sec-format (nth$ 2 ?period))  crlf)
+  
   (assert (attention-message (text (str-cat "Order " ?id ": " ?q " x " ?c " from "
 					    (time-sec-format (nth$ 1 ?period)) " to "
 					    (time-sec-format (nth$ 2 ?period))))

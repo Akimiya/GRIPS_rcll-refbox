@@ -203,6 +203,7 @@
   =>
   (retract ?mf) ; message will be destroyed after rule completes
   (modify ?sf (state (sym-cat (pb-field-value ?p "state"))) (prev-state ?state))
+  (printout t "Changing state from " ?state " to " (sym-cat (pb-field-value ?p "state")) crlf)
 )
 
 (defrule net-recv-SetGameState-illegal
@@ -220,6 +221,7 @@
   =>
   (retract ?mf) ; message will be destroyed after rule completes
   (modify ?sf (phase (sym-cat (pb-field-value ?p "phase"))) (prev-phase ?phase))
+  (printout t "Changing phase from " ?phase " to " (sym-cat (pb-field-value ?p "phase")) crlf)
 )
 
 (defrule net-recv-SetGamePhase-illegal

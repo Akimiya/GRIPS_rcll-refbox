@@ -796,6 +796,9 @@ LLSFRefBoxShell::client_msg(uint16_t comp_id, uint16_t msg_type,
     }
     if (attmsg_has_endtime_) {
       boost::posix_time::ptime now(boost::posix_time::microsec_clock::local_time());
+      // needed to compile successfully with machine specific gcc/boost version
+      // TODO: comment out for real simulation run
+//      attmsg_endtime_ = now + boost::posix_time::milliseconds(static_cast<long>(1000 * am->time_to_show()));
       attmsg_endtime_ = now + boost::posix_time::seconds(am->time_to_show());
     }
     if (attmsg_string_ != "") {

@@ -187,6 +187,16 @@
 	(bind ?competitive-order-id (nth$ (random 1 (length$ ?potential-competitive-orders)) ?potential-competitive-orders))
 	(do-for-fact ((?order order)) (eq ?order:id ?competitive-order-id)
 	  (modify ?order (competitive TRUE)))
+
+  ; additional output of game configuration and preemptive orders
+  (printout t "game-parameterize ORDER CONFIG:" crlf)
+  (delayed-do-for-all-facts ((?order order)) TRUE
+    (printout t "id=" ?order:id " complexity=" ?order:complexity " competitive=" ?order:competitive " quantity-requested=" ?order:quantity-requested " start-range=" ?order:start-range " activation-range=" ?order:activation-range " duration-range=" ?order:duration-range " allow-overtime=" ?order:allow-overtime crlf)
+  )
+  (printout t "game-parameterize ORDER PLAN:" crlf)
+  (delayed-do-for-all-facts ((?order order)) TRUE
+    (printout t "id=" ?order:id " activate-at=" ?order:activate-at " base-color=" ?order:base-color " cap-color=" ?order:cap-color " ring-colors=" ?order:ring-colors crlf)
+  )
 )
 
 (defrule game-print
